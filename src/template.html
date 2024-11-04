@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="form-container">
+        <form id="userForm" novalidate>
+          <!-- Email Field -->
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+    
+          <!-- Country Field -->
+          <label for="country">Country:</label>
+          <select id="country" name="country" required>
+            <option value="">Select your country</option>
+            <option value="US">United States</option>
+            <option value="CA">Canada</option>
+            <option value="UK">United Kingdom</option>
+            <option value="AU">Australia</option>
+            <!-- Add more options as needed -->
+          </select>
+    
+          <!-- Zip Code Field -->
+          <label for="zip">Zip Code:</label>
+          <input type="text" id="zip" name="zip" pattern="\\d{5}" title="Please enter a valid 5-digit ZIP code" required>
+    
+          <!-- Password Field -->
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="password" minlength="8" required>
+    
+          <!-- Confirm Password Field -->
+          <label for="confirm-password">Confirm Password:</label>
+          <input type="password" id="confirm-password" name="confirm-password" minlength="8" required>
+    
+          <!-- Submit Button -->
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+</body>
+</html>
