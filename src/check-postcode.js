@@ -2,7 +2,7 @@
    
 
     // For each country, defines the pattern that the postal code has to follow
-    const constraints = {
+    export const constraints = {
       noSelect: [
         /^[0-9]{5}(?:-[0-9]{4})?$/,
         "You must select a country to begin",
@@ -25,24 +25,48 @@
       ],
     };
 
-    
+
+
+
 
 // Default export function for postal code validation
 
 export default function checkPostalCode() {
     
   const postcodeError = document.querySelector("#zip + span.error");
-  const country = document.getElementById("country").value;
+  const country = document.getElementById("country");
   const postalCodeField = document.getElementById("zip");
+
+//dynamically update the reg ex pattern in the HTML so it fires the CSS when invalid
+
+country.addEventListener("change", () => {
+  const selectedCountry = country.value;
+
+  if (constraints[selectedCountry]){
+    const correctPattern = constraints[selectedCountry][0];
+
+    postalCodeField.setAttribute("pattern", correctPattern.source);
+
+    console.log(
+      `Pattern set for country ${selectedCountry}:`,
+      postalCodeField.getAttribute("pattern"));
+
+  } else {
+    postalCodeField.removeAttribute("pattern");
+  }
+
+}
+);
+
+
+
 
 
   postalCodeField.addEventListener("input", () => {
     const postcode = postalCodeField.value;
 
-    const correctPattern = constraints[country][0];
-
-    if (!correctPattern.test(postcode)) {
-        postcodeError.textContent = constraints[country][1];
+    if (!postalCodeField.checkValidity()) {
+        postcodeError.textContent = constraints[country.value][1];
         postcodeError.className = "error active";
     } else {
         postcodeError.textContent = "";
